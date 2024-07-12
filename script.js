@@ -10,10 +10,14 @@ fetch('travel_recommendation_api.json')
 function searchRecommendations() {
     const searchQuery = document.getElementById('search-bar').value.toLowerCase();
     const results = [];
-
+	
+	console.log(searchQuery);
+	console.log(window.travelData.beaches);
+	
     if (searchQuery === 'beach' || searchQuery === 'beaches') {
         // Return all beaches if the search query is 'beach' or 'beaches'
         window.travelData.beaches.forEach(beach => {
+			console.log("inside beach");
             if (beach.name.toLowerCase().includes(searchQuery)) {
                 results.push(beach);
             }
