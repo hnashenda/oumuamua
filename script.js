@@ -14,12 +14,16 @@ function searchRecommendations() {
     if (searchQuery === 'beach' || searchQuery === 'beaches') {
         // Return all beaches if the search query is 'beach' or 'beaches'
         window.travelData.beaches.forEach(beach => {
-            results.push(beach);
+            if (beach.name.toLowerCase().includes(searchQuery)) {
+                results.push(beach);
+            }
         });
     } else if (searchQuery === 'temple' || searchQuery === 'temples') {
         // Return all temples if the search query is 'temple' or 'temples'
         window.travelData.temples.forEach(temple => {
-            results.push(temple);
+            if (temple.name.toLowerCase().includes(searchQuery)) {
+                results.push(temple);
+            }
         });
     } else {
         // Search for countries
