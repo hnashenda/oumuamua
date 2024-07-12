@@ -1,5 +1,3 @@
-// script.js
-
 // Fetch data from the JSON file
 fetch('travel_recommendation_api.json')
     .then(response => response.json())
@@ -13,28 +11,40 @@ function searchRecommendations() {
     const searchQuery = document.getElementById('search-bar').value.toLowerCase();
     const results = [];
 
-    // Search for countries
-    travelData.countries.forEach(country => {
-        country.cities.forEach(city => {
-            if (city.name.toLowerCase().includes(searchQuery)) {
-                results.push(city);
+    if (searchQuery === 'beach' || searchQuery === 'beaches') {
+        // Return all beaches if the search query is 'beach' or 'beaches'
+        travelData.beaches.forEach(beach => {
+            results.push(beach);
+        });
+    } else if (searchQuery === 'temple' || searchQuery === 'temples') {
+        // Return all temples if the search query is 'temple' or 'temples'
+        travelData.temples.forEach(temple => {
+            results.push(temple);
+        });
+    } else {
+        // Search for countries
+        travelData.countries.forEach(country => {
+            country.cities.forEach(city => {
+                if (city.name.toLowerCase().includes(searchQuery)) {
+                    results.push(city);
+                }
+            });
+        });
+
+        // Search for temples
+        travelData.temples.forEach(temple => {
+            if (temple.name.toLowerCase().includes(searchQuery)) {
+                results.push(temple);
             }
         });
-    });
 
-    // Search for temples
-    travelData.temples.forEach(temple => {
-        if (temple.name.toLowerCase().includes(searchQuery)) {
-            results.push(temple);
-        }
-    });
-
-    // Search for beaches
-    travelData.beaches.forEach(beach => {
-        if (beach.name.toLowerCase().includes(searchQuery)) {
-            results.push(beach);
-        }
-    });
+        // Search for beaches
+        travelData.beaches.forEach(beach => {
+            if (beach.name.toLowerCase().includes(searchQuery)) {
+                results.push(beach);
+            }
+        });
+    }
 
     displayResults(results);
 }
@@ -75,8 +85,6 @@ function resetResults() {
     document.getElementById('results').innerHTML = '';
     document.getElementById('search-bar').value = '';
 }
-
-// script.js
 
 // Function to display time in a specific timezone
 function displayTime(timezone, elementId) {
